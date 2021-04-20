@@ -17,7 +17,6 @@ public class AdminDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table prevuser(username TEXT)");
         db.execSQL("create Table users(username TEXT primary key,email TEXT,password TEXT)");
         db.execSQL("create Table keywords(username TEXT primary key,keyword1 TEXT,keyword2 TEXT,keyword3 TEXT)");
         db.execSQL("create table articleData(username TEXT,id TEXT,url TEXT,title TEXT,published TEXT,urlToImage TEXT)");
@@ -28,8 +27,6 @@ public class AdminDB extends SQLiteOpenHelper {
         db.execSQL("drop Table if exists users");
         db.execSQL("drop Table if exists keywords");
         db.execSQL("drop Table if exists articleData");
-        //new line
-        db.execSQL("drop table if exists prevuser");
     }
 
     public boolean insertdata(String username,String email,String password){
@@ -57,18 +54,6 @@ public class AdminDB extends SQLiteOpenHelper {
         else
             return true;
     }
-    //new insert function
-    public boolean insertPrevTable(String username)
-    {
-        SQLiteDatabase db=getWritableDatabase();
-        db.delete("prevuser",null,null);
-        ContentValues content=new ContentValues();
-        content.put("username",username);
-        long result=db.insert("prevuser",null,content);
-        if(result==-1) return false;
-        else return true;
-    }
-    //----------------------------
     public void insertDataTable(String username,String id,String url,String title,String published,String urlToImage)
     {
         SQLiteDatabase db=getWritableDatabase();
@@ -111,24 +96,6 @@ public class AdminDB extends SQLiteOpenHelper {
         if(cursor.getCount()>0) return true;
         else return false;
     }
-    //new function
-    public String checkprevusername(){
-        SQLiteDatabase db=getWritableDatabase();
-        Cursor cursor=db.rawQuery("select * from prevuser",null);
-        if(cursor.getCount()>0)
-        {
-            String result="";
-            Cursor cursor2=db.rawQuery("select username from prevuser",null);
-            if(cursor2.moveToFirst())
-            {
-                result=cursor2.getString(0);
-            }
-            cursor2.close();
-            return result;
-        }
-        else return "-1";
-    }
-    //..............
     public boolean checkUserInTable(String username)
     {
         SQLiteDatabase db=getWritableDatabase();
