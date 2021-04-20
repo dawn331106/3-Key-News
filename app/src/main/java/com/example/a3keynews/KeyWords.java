@@ -31,9 +31,6 @@ public class KeyWords extends AppCompatActivity {
                 String key3=keyword3.getText().toString();
                 Intent intent=getIntent();
                 String user=intent.getStringExtra("cur_user");
-               // Log.i("Key1",key1);
-               // Log.i("key2",key2);
-               // Log.i("key3",key3);
                 Boolean insert=db.inserttable2(user,key1,key2,key3);
                 if(insert==true) {
                     Toast.makeText(KeyWords.this, "Successful!", Toast.LENGTH_SHORT).show();
