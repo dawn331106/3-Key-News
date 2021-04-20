@@ -29,7 +29,7 @@ public class AdminDB extends SQLiteOpenHelper {
         db.execSQL("drop Table if exists keywords");
         db.execSQL("drop Table if exists articleData");
         //new line
-        db.execSQL("drop table if exists ");
+        db.execSQL("drop table if exists prevuser");
     }
 
     public boolean insertdata(String username,String email,String password){
