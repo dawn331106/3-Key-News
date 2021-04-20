@@ -60,7 +60,6 @@ public class AdminDB extends SQLiteOpenHelper {
         if(id.equals("1"))
         {
            int delnum= db.delete("articleData","username=?",new String[]{username});
-         //  Log.i("Hooise ni = ",String.valueOf(delnum));
         }
         ContentValues content=new ContentValues();
         content.put("username",username);
