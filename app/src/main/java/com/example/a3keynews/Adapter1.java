@@ -44,22 +44,6 @@ public class Adapter1 extends RecyclerView.Adapter<Adapter1.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,int position) {
-      /* final Articles art=articles.get(position);
-       final String url=art.getUrl();
-      // Log.i("The url = ",url);
-       holder.newsTitle.setText(art.getTitle());
-       holder.newsDate.setText(art.getPublishedAt());
-       String imageUrl=art.getUrlToImage();
-      // Log.i("Image Url = ",imageUrl);
-        Picasso.get().load(imageUrl).into(holder.imageview);
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(context,NewsDetailed.class);
-                intent.putExtra("url",url);
-                context.startActivity(intent);
-            }
-        });*/
       final String artUrl=url.get(position);
       final String arttitle=title.get(position);
       final String artPublished=published.get(position);
