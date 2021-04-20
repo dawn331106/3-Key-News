@@ -19,46 +19,54 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db=new AdminDB(this);
         username=(EditText) findViewById(R.id.textUsername);
         password=(EditText) findViewById(R.id.textPassword);
         login=(Button) findViewById(R.id.loginButton);
-        db=new AdminDB(this);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String user=username.getText().toString();
-                String pass=password.getText().toString();
-                if(user.equals("")||pass.equals("")) Toast.makeText(MainActivity.this,"Please enter all the fields",Toast.LENGTH_SHORT).show();
-                else
-                {
-                    Boolean check=db.checkUsernameAndPassword(user,pass);
-                    if(check==true)
-                    {
-                        Toast.makeText(MainActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
-                        Boolean userCheck=db.checkUserInTable(user);
-                        if(userCheck==true) {
-                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                            intent.putExtra("the_user",user);
-                            startActivity(intent);
-                        }
-                        else
-                        {
-                            Intent intent = new Intent(MainActivity.this, KeyWords.class);
-                            intent.putExtra("cur_user",user);
-                            startActivity(intent);
-                        }
+        //new line
+        String prevUser=db.checkprevusername();
+        if(prevUser.equals("-1")) {
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String user = username.getText().toString();
+                    String pass = password.getText().toString();
+                    if (user.equals("") || pass.equals(""))
+                        Toast.makeText(MainActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                    else {
+                        Boolean check = db.checkUsernameAndPassword(user, pass);
+                        Boolean prevuser = db.insertPrevTable(user);
+                        if (check == true) {
+                            Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            Boolean userCheck = db.checkUserInTable(user);
+                            if (userCheck == true) {
+                                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                intent.putExtra("the_user", user);
+                                startActivity(intent);
+                            } else {
+                                Intent intent = new Intent(MainActivity.this, KeyWords.class);
+                                intent.putExtra("cur_user", user);
+                                startActivity(intent);
+                            }
+                        } else
+                            Toast.makeText(MainActivity.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
                     }
-                    else Toast.makeText(MainActivity.this,"Invalid Username or Password",Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-        button=(Button) findViewById(R.id.signupButton);
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent=new Intent(MainActivity.this, Sign_up.class);
-                startActivity(intent);
-            }
-        });
+            });
+            button = (Button) findViewById(R.id.signupButton);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, Sign_up.class);
+                    startActivity(intent);
+                }
+            });
+        }
+        else
+        {
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            intent.putExtra("the_user",prevUser );
+            startActivity(intent);
+        }
     }
 }
