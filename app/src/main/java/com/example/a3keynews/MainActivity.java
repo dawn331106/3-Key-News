@@ -23,10 +23,7 @@ public class MainActivity extends AppCompatActivity {
         username=(EditText) findViewById(R.id.textUsername);
         password=(EditText) findViewById(R.id.textPassword);
         login=(Button) findViewById(R.id.loginButton);
-        //new line
-        String prevUser=db.checkprevusername();
-        if(prevUser.equals("-1")) {
-            login.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String user = username.getText().toString();
@@ -35,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                     else {
                         Boolean check = db.checkUsernameAndPassword(user, pass);
-                        Boolean prevuser = db.insertPrevTable(user);
                         if (check == true) {
                             Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                             Boolean userCheck = db.checkUserInTable(user);
@@ -61,12 +57,5 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-        }
-        else
-        {
-            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-            intent.putExtra("the_user",prevUser );
-            startActivity(intent);
-        }
     }
 }
