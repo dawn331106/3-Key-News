@@ -86,7 +86,6 @@ public class HomeActivity extends AppCompatActivity {
                     {
                         for(int i=0;i<=2;i++)
                         {
-                           // qint1.add(articles.get(i));
                             _url=articles.get(i).getUrl();
                             _title=articles.get(i).getTitle();
                             _published=articles.get(i).getPublishedAt();
@@ -118,7 +117,6 @@ public class HomeActivity extends AppCompatActivity {
                     }
                     adapter=new Adapter1(HomeActivity.this,url,title,publised,urltoimage);
                     recyclerView.setAdapter(adapter);
-                    Log.i("Count is here = ",String.valueOf(cnt));
                 }
             }
 
@@ -128,10 +126,8 @@ public class HomeActivity extends AppCompatActivity {
                   if(flag==0)
                   {
                        int row=db.rowNum(user);
-                       Log.i("RowNumbers = ",String.valueOf(row));
                        for(int i=1;i<=row;i++)
                        {
-                          // Log.i("Ural = ",db.getdata(user,"url",String.valueOf(i)));
                            url.add(db.getdata(user,"url",String.valueOf(i)));
                            title.add(db.getdata(user,"title",String.valueOf(i)));
                            publised.add(db.getdata(user,"published",String.valueOf(i)));
@@ -163,7 +159,6 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             case R.id.logout:
                 Intent intent2 = new Intent(HomeActivity.this, MainActivity.class);
-                //intent.putExtra("cur_user",user);
                 startActivity(intent2);
                 return true;
             default:
