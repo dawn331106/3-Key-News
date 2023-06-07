@@ -35,6 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+// This glass is responsible for fetching news data of a user from the database sends the data to Adaptar class to display
 public class HomeActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Adapter1 adapter;
@@ -128,10 +129,10 @@ public class HomeActivity extends AppCompatActivity {
                        int row=db.rowNum(user);
                        for(int i=1;i<=row;i++)
                        {
-                           url.add(db.getdata(user,"url",String.valueOf(i)));
-                           title.add(db.getdata(user,"title",String.valueOf(i)));
-                           published.add(db.getdata(user,"published",String.valueOf(i)));
-                           urlToImage.add(db.getdata(user,"urlToImage",String.valueOf(i)));
+                           url.add(db.getData(user,"url",String.valueOf(i)));
+                           title.add(db.getData(user,"title",String.valueOf(i)));
+                           published.add(db.getData(user,"published",String.valueOf(i)));
+                           urlToImage.add(db.getData(user,"urlToImage",String.valueOf(i)));
                        }
                       adapter=new Adapter1(HomeActivity.this,url,title,published,urlToImage);
                       recyclerView.setAdapter(adapter);

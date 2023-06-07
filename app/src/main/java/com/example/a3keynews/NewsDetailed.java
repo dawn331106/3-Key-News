@@ -16,6 +16,7 @@ import android.webkit.WebViewClient;
 import java.io.File;
 import java.net.URL;
 
+// For showing the news data when the news article is clicked and storing news data for offline reading.
 public class NewsDetailed extends AppCompatActivity {
     WebView webView;
     @Override

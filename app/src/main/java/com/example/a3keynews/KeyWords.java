@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+// The keywords page that asks three keywords from the user and stores them in the database
 public class KeyWords extends AppCompatActivity {
     EditText keyword1,keyword2,keyword3;
     Button Done;
@@ -31,7 +32,7 @@ public class KeyWords extends AppCompatActivity {
                 String key3=keyword3.getText().toString();
                 Intent intent=getIntent();
                 String user=intent.getStringExtra("cur_user");
-                Boolean insert=db.inserttable2(user,key1,key2,key3);
+                Boolean insert=db.insertTable2(user,key1,key2,key3);
                 if(insert==true) {
                     Toast.makeText(KeyWords.this, "Successful!", Toast.LENGTH_SHORT).show();
                     Intent intent1=new Intent(getApplicationContext(),HomeActivity.class);

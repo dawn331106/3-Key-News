@@ -24,7 +24,7 @@ import java.util.List;
 
 import static android.app.PendingIntent.getActivity;
 
-
+// This class is responsible for displaying news data
 public class Adapter1 extends RecyclerView.Adapter<Adapter1.ViewHolder>{
     Context context;
     List<String>url,title,published,urltoimage;

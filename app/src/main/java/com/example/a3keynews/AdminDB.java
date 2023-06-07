@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.example.a3keynews.parameter.Articles;
 
+// This class handles the database for storing and retrieving user data and news data of a user.
 public class AdminDB extends SQLiteOpenHelper {
     public static final String dbname="Login.db";
     public AdminDB(Context context) {
@@ -29,7 +30,8 @@ public class AdminDB extends SQLiteOpenHelper {
         db.execSQL("drop Table if exists articleData");
     }
 
-    public boolean insertdata(String username,String email,String password){
+    // For storing user information -> username,email and password
+    public boolean insertData(String username,String email,String password){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues content=new ContentValues();
         content.put("username",username);
@@ -40,7 +42,8 @@ public class AdminDB extends SQLiteOpenHelper {
         else
             return true;
     }
-    public boolean inserttable2(String username,String keyword1,String keyword2,String keyword3)
+    // For storing the keywords of a user
+    public boolean insertTable2(String username,String keyword1,String keyword2,String keyword3)
     {
         SQLiteDatabase db=getWritableDatabase();
         db.delete("keywords","username=?",new String[]{username});
@@ -54,12 +57,13 @@ public class AdminDB extends SQLiteOpenHelper {
         else
             return true;
     }
+    // For storing news information for a particular user
     public void insertDataTable(String username,String id,String url,String title,String published,String urlToImage)
     {
         SQLiteDatabase db=getWritableDatabase();
         if(id.equals("1"))
         {
-           int delnum= db.delete("articleData","username=?",new String[]{username});
+           int delNum= db.delete("articleData","username=?",new String[]{username});
         }
         ContentValues content=new ContentValues();
         content.put("username",username);
@@ -71,6 +75,7 @@ public class AdminDB extends SQLiteOpenHelper {
         db.insert("articleData",null,content);
 
     }
+    // To find the number of news articles of a user stored in database
     public int rowNum(String username)
     {
         SQLiteDatabase db=getWritableDatabase();
@@ -83,18 +88,21 @@ public class AdminDB extends SQLiteOpenHelper {
         cursor.close();
         return Integer.valueOf(res);
     }
+    // To verify if a user is registered or not
     public boolean checkUsername(String username){
         SQLiteDatabase db=getWritableDatabase();
         Cursor cursor=db.rawQuery("select * from users where username =?",new String []{username});
         if(cursor.getCount()>0) return true;
         else return false;
     }
+    // To verify both username and password
     public boolean checkUsernameAndPassword(String username,String password){
         SQLiteDatabase db=getWritableDatabase();
         Cursor cursor=db.rawQuery("select * from users where username =? and password=?",new String []{username,password});
         if(cursor.getCount()>0) return true;
         else return false;
     }
+    // To check if a user has already entered the keywords
     public boolean checkUserInTable(String username)
     {
         SQLiteDatabase db=getWritableDatabase();
@@ -102,7 +110,8 @@ public class AdminDB extends SQLiteOpenHelper {
         if(cursor.getCount()>0) return true;
         else return false;
     }
-    public String getdata(String username, String text,String id)
+    // To get the stored news data of a user
+    public String getData(String username, String text,String id)
     {
         SQLiteDatabase db=getWritableDatabase();
         String result="";
@@ -114,7 +123,7 @@ public class AdminDB extends SQLiteOpenHelper {
         cursor.close();
         return result;
     }
-
+    // To retrieve the keywords of a user
     public String getKeyWord(String username,int ind)
     {
         SQLiteDatabase db=getWritableDatabase();
