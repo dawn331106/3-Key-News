@@ -42,9 +42,9 @@ public class HomeActivity extends AppCompatActivity {
     Button refreshButton;
     List<Articles> articles=new ArrayList<>();
     List<String>url=new ArrayList<>();
-    List<String>publised=new ArrayList<>();
+    List<String>published=new ArrayList<>();
     List<String>title=new ArrayList<>();
-    List<String>urltoimage=new ArrayList<>();
+    List<String>urlToImage=new ArrayList<>();
     String _url;
     String _title;
     String _published;
@@ -94,8 +94,8 @@ public class HomeActivity extends AppCompatActivity {
                             cnt++;
                             url.add(_url);
                             title.add(_title);
-                            publised.add(_published);
-                            urltoimage.add(_urlToImage);
+                            published.add(_published);
+                            urlToImage.add(_urlToImage);
                         }
                     }
                     else
@@ -110,12 +110,12 @@ public class HomeActivity extends AppCompatActivity {
                                 _urlToImage=articles.get(i).getUrlToImage();
                                 url.add(_url);
                                 title.add(_title);
-                                publised.add(_published);
-                                urltoimage.add(_urlToImage);
+                                published.add(_published);
+                                urlToImage.add(_urlToImage);
                             }
                         }
                     }
-                    adapter=new Adapter1(HomeActivity.this,url,title,publised,urltoimage);
+                    adapter=new Adapter1(HomeActivity.this,url,title,published,urlToImage);
                     recyclerView.setAdapter(adapter);
                 }
             }
@@ -130,14 +130,14 @@ public class HomeActivity extends AppCompatActivity {
                        {
                            url.add(db.getdata(user,"url",String.valueOf(i)));
                            title.add(db.getdata(user,"title",String.valueOf(i)));
-                           publised.add(db.getdata(user,"published",String.valueOf(i)));
-                           urltoimage.add(db.getdata(user,"urlToImage",String.valueOf(i)));
+                           published.add(db.getdata(user,"published",String.valueOf(i)));
+                           urlToImage.add(db.getdata(user,"urlToImage",String.valueOf(i)));
                        }
-                      adapter=new Adapter1(HomeActivity.this,url,title,publised,urltoimage);
+                      adapter=new Adapter1(HomeActivity.this,url,title,published,urlToImage);
                       recyclerView.setAdapter(adapter);
                        flag=1;
                   }
-                  Toast.makeText(HomeActivity.this,"Check yout internet Connection", Toast.LENGTH_SHORT).show();
+                  Toast.makeText(HomeActivity.this,"Check your internet Connection", Toast.LENGTH_SHORT).show();
             }
         });
     }
